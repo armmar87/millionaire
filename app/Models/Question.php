@@ -33,7 +33,7 @@ class Question extends Model
     {
         $question = self::query();
         $question->when($play, function ($query) use ($play) {
-            return $query->whereNotIn($play->question_ids);
+            return $query->whereNotIn('id', $play->question_ids);
         });
         $questionIds = $question->pluck('id');
 

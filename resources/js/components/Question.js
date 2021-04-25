@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import api from '../util/api'
+import { useHistory } from "react-router-dom";
+import axios from 'axios'
 
 export default function Question() {
 
     const [data, setData] = useState([])
 
     useEffect(() => {
-        api().get('questions').then(response=>{
+        axios.get('http://127.0.0.1:8000/api/questions').then(response=>{
             setData(response.data)
         }).catch(err => console.log(err))
     }, [])
@@ -22,7 +23,7 @@ export default function Question() {
                 </thead>
                 <tbody>
                     {
-                        data.map(row=>{
+                        data.map(row => {
                             return(
                                 <tr key={row.id}>
                                     <th scope="row">{row.id}</th>

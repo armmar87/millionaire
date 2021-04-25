@@ -10002,3 +10002,63 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.play {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 10px;
+  background: white;
+}
+
+.play h3 {
+  text-align: center;
+}
+
+.play h4 {
+  margin: 10px 30px;
+}
+
+.play h3 span {
+  color: dodgerblue;
+}
+
+.play h5 span {
+  color: rgba(217, 49, 49, 0.91);
+}
+
+.play h4 {
+  margin: 45px 5px 15px 5px;
+}
+
+.play h4 span {
+  color: #28e328;
+}
+
+.play button {
+  border-radius: 5px;
+  background: aquamarine;
+  color: #302be2;
+}
+
+.play__answer {
+  margin: 10px 4px;
+  border: 2px solid #545b62;
+  padding: 2px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.play__answer--wrong {
+  background: rgba(234, 95, 95, 0.65) !important;
+}
+
+.play__answer--correct {
+  background: rgba(101, 226, 101, 0.57) !important;
+}
+
+.play__answer--active {
+  background: rgba(68, 68, 229, 0.44);
+}
+
+.play__level {
+  text-transform: capitalize;
+}

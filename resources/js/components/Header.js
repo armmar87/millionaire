@@ -3,7 +3,8 @@ import { Switch, Route, Link } from 'react-router-dom';
 
 import Home from './Home';
 import Play from './Play';
-import Question from './Question';
+import Score from './Score';
+// import Question from './Question';
 import Login from './Login';
 
 export default function Header() {
@@ -22,9 +23,9 @@ export default function Header() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/start-play">Plays</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/questions">Questions</Link>
-                            </li>
+                            {/*<li className="nav-item">*/}
+                            {/*    <Link className="nav-link" to="/questions">Questions</Link>*/}
+                            {/*</li>*/}
                         </ul>
                     </div>
                     <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -39,8 +40,9 @@ export default function Header() {
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/start-play' component={Play} />
-                <Route exact path='/questions' component={Question} />
-                <Route exact path='/login' component={Login} />
+                <Route exact path='/score' component={Score} />
+                {/*<Route exact path='/questions' component={Question} />*/}
+                {/*<Route exact path='/login' component={Login} />*/}
             </Switch>
         </div>
     )

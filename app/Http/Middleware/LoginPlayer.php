@@ -19,8 +19,10 @@ class LoginPlayer
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = User::whereType('player')->first();
-        Auth::attempt(['email' => $user->email, 'password' => 'password']);
+        if (! Auth::check()) {
+            $user = User::whereType('player')->first();
+            Auth::attempt(['email' => $user->email, 'password' => 'password']);
+        }
 
         return $next($request);
     }

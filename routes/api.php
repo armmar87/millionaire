@@ -16,14 +16,11 @@ use \App\Http\Controllers\QuestionController;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
 
-Route::get('start-play', [PlayController::class, 'index'])->where('path', '.*');
+Route::get('start-play', [PlayController::class, 'index']);
+Route::post('add-answer', [PlayController::class, 'addAnswer']);
 
-
-Route::resource('questions', QuestionController::class);
+//Route::resource('questions', QuestionController::class);
 
 //Route::group(['middleware' => 'auth:sanctum'], function (){
 //
