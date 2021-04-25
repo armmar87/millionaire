@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\PlayController;
 use \App\Http\Controllers\QuestionController;
 
 /*
@@ -19,8 +20,13 @@ use \App\Http\Controllers\QuestionController;
 //    return $request->user();
 //});
 
-Route::group(['middleware' => 'api:sanctum'], function (){
-    Route::resource('questions', QuestionController::class);
-});
+Route::get('start-play', [PlayController::class, 'index'])->where('path', '.*');
+
+
+Route::resource('questions', QuestionController::class);
+
+//Route::group(['middleware' => 'auth:sanctum'], function (){
+//
+//});
 
 

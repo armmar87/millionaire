@@ -8,4 +8,35 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
+
+    protected $table = 'questions';
+    protected $fillable = ['title', 'level', 'step', 'point'];
+    public $timestamps = false;
+
+    const LOW = 'low';
+    const MEDIUM = 'medium';
+    const HARD = 'hard';
+    const VERY_HARD = 'very_hard';
+
+    const LEVELS = [
+        self::LOW => 5,
+        self::MEDIUM => 10,
+        self::HARD => 15,
+        self::VERY_HARD => 20,
+    ];
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+    public static function getRandomId($play): int
+    {
+        $question = self::query();
+        $question->when($play, function ($query) use ($play) {
+            return $query->whereNotIn($play->question_ids);
+        });
+        $questionIds = $question->pluck('id');
+
+        return $questionIds->toArray()[rand(0, $questionIds->count() - 1)];
+    }
 }

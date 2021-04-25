@@ -10,7 +10,6 @@ class AuthController extends Controller
 {
     public function logIn(Request $request)
     {
-        dd($request->all());
         $request->validate(
             [
                 'email' => 'required|string',

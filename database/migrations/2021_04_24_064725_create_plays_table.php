@@ -16,7 +16,7 @@ class CreatePlaysTable extends Migration
         Schema::create('plays', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->integer('attempt')->default(1);
+            $table->integer('game')->default(1);
             $table->tinyInteger('step')->default(1);
             $table->tinyInteger('point')->default(0);
             $table->json('question_ids');

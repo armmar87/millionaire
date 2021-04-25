@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthController;
+use \App\Http\Controllers\PlayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,15 @@ use \App\Http\Controllers\AuthController;
 */
 
 
-Route::get('/{path?}', function () {
-    return view('welcome');
-})->where('path', '.*');
+Route::group(['middleware' => 'login.player'], function () {
+    Route::get('/{path?}', function () {
+        return view('welcome');
+    })->where('path', '.*');
+});
 
-Route::post('/login', [AuthController::class, 'logIn']);
-Route::post('/logout', [AuthController::class, 'logOut']);
+//Route::post('/login', [AuthController::class, 'logIn']);
+//Route::post('/logout', [AuthController::class, 'logOut']);
 
 //Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
