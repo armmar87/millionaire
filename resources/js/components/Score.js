@@ -1,17 +1,23 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import { useParams } from "react-router-dom";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import axios from "axios";
-import cc from 'classcat';
 
 export default function Score() {
 
-    let params = useParams();
-    console.log(params)
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/api/score').then(response => {
+            setData(response.data)
+        }).catch(err => console.log(err))
+    }, [])
 
     return (
-        <div>
-            <h1>Score</h1>
+        <div className='score'>
+            <h3><span>Score</span>: { data.point }</h3>
+            <div>
+                <Link className="nav-link" to="/start-play">Play agian</Link>
+            </div>
         </div>
     )
 }

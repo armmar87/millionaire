@@ -19,7 +19,7 @@ class CreatePlaysTable extends Migration
             $table->integer('attempt')->default(1);
             $table->tinyInteger('step')->default(1);
             $table->tinyInteger('point')->default(0);
-            $table->json('question_ids');
+            $table->json('question_ids')->default('[]');
 
             $table->foreign('user_id')->references('id')->onDelete('cascade')->on('users');
         });

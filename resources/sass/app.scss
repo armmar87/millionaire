@@ -7,7 +7,7 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.play {
+.play, .score, .home {
     max-width: 500px;
     margin: 20px auto;
     padding: 10px;
@@ -15,6 +15,12 @@
 }
 .play h3 {
     text-align: center;
+}
+.score h3 {
+    text-align: center;
+}
+.score h3 span {
+    color: rgba(217, 49, 49, 0.91);
 }
 .play h4 {
     margin: 10px 30px;

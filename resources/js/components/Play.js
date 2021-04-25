@@ -2,7 +2,6 @@ import React, {useEffect, useMemo, useState} from 'react';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import cc from 'classcat';
-import reportToConsole from "next/dist/telemetry/trace/report/to-console";
 
 export default function Play() {
 
@@ -36,11 +35,15 @@ export default function Play() {
         setUserAnswers(answers);
     }
 
-    const isAnswersValid = useMemo(() => data?.question?.answers
-            .filter(value => value.correct)
-            .every(answer => userAnswers.includes(answer.id)),
-        [data?.question?.answers, userAnswers]
-    );
+    const isAnswersValid = useMemo(() => {
+        if(data && data.question && data.question.answers) {
+            const trueAnswers = data.question.answers.filter(value => value.correct).map(value => value.id);
+            const checkByUser = trueAnswers.every(answer => userAnswers.includes(answer));
+            const checkByAnswer = userAnswers.every(answer => trueAnswers.includes(answer));
+            return checkByUser && checkByAnswer;
+        }
+        return false
+    }, [data?.question?.answers, userAnswers])
 
     const handleCheck = () => {
         setCheck(true);
@@ -54,7 +57,7 @@ export default function Play() {
     const handleNext = async () => {
         const params = {'question_id': data.question.id, 'correct_answer': isAnswersValid}
         await axios.post('http://127.0.0.1:8000/api/add-answer', params)
-        if (data.play.step === 5) {
+        if (data?.play?.step === 5) {
             history.push('/score');
         } else {
             fetchData()
@@ -84,7 +87,7 @@ export default function Play() {
                 })
             }
 
-            <button onClick={handleCheck}>Check</button>
+            {!isChecked && <button onClick={handleCheck}>Check</button>}
             {isChecked && <button onClick={handleNext}>Next</button>}
         </div>
     )

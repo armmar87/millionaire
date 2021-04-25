@@ -18,6 +18,7 @@ use \App\Http\Controllers\QuestionController;
 
 
 Route::get('start-play', [PlayController::class, 'index']);
+Route::get('score', [PlayController::class, 'score']);
 Route::post('add-answer', [PlayController::class, 'addAnswer']);
 
 //Route::resource('questions', QuestionController::class);
