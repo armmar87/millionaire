@@ -72,6 +72,7 @@ export default function Play() {
             <h3><span>Play</span>: { getAttempts }</h3>
             <h5><span>Step</span>: { getStep }</h5>
             <h5 className='play__level'><span>Level</span>: { data.question.level }</h5>
+            <h5><span>Point</span>: { data.question.point }</h5>
             <h4><span>Question</span>: { data.question.title }</h4>
             {
                 data.question.answers.map(row => {

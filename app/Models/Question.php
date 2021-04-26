@@ -11,6 +11,7 @@ class Question extends Model
 
     protected $table = 'questions';
     protected $fillable = ['title', 'level', 'step', 'point'];
+    protected $appends = ['point'];
     public $timestamps = false;
 
     const LOW = 'low';
@@ -29,12 +30,16 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class);
     }
+
+    function getPointAttribute()
+    {
+        return self::LEVELS[$this->level];
+    }
+
     public static function getRandomId($play): int
     {
         $question = self::query();
-        $question->when($play, function ($query) use ($play) {
-            return $query->whereNotIn('id', $play->question_ids);
-        });
+        $question->whereNotIn('id', $play->question_ids);
         $questionIds = $question->pluck('id');
 
         return $questionIds->toArray()[rand(0, $questionIds->count() - 1)];
